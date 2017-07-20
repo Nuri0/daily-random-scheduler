@@ -8,11 +8,11 @@
     <table>
       <tr>
         <td><b>Color:</b></td>
-        <td><input type="color" [(ngModel)]="choice.color" (input)="choiceUpdated(choice)" /></td>
+        <td><input type="color" [(ngModel)]="choice.color" (input)="choiceUpdated()" /></td>
       </tr>
       <tr>
         <td><b>Weight:</b></td>
-        <td><input type="number" [(ngModel)]="choice.weight" min="0" (input)="choiceUpdated(choice)" /></td>
+        <td><input type="number" [(ngModel)]="choice.weight" min="0" (input)="choiceUpdated()" /></td>
       </tr>
     </table>
     <button class="delete-choice" (click)="deleteChoice()">Delete</button>
