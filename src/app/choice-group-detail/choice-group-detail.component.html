@@ -1,0 +1,25 @@
+<h2>Choices</h2>
+
+Add a new choice <input placeholder="Name for a new choice" [(ngModel)]="newChoice.title" (keyup.enter)="addChoice()">
+
+<div *ngIf=choiceGroup.choices.length>
+  <ul class="choice-list">
+    <li *ngFor="let choice of choiceGroup.choices">
+      <choice-overview [choice]="choice" [groupId]="choiceGroup.id"></choice-overview>
+    </li>
+  </ul>
+</div>
+
+<div class="clear"></div>
+
+<h2>Settings</h2>
+Selections/Day <input type="number" [(ngModel)]="choiceGroup.choicesPerDay" (input)="choiceGroupUpdated()" />
+
+<h2>Analytics</h2>
+<h3>Distribution of choices for the next {{numberOfDays}} days</h3>
+
+<div>
+  <label>Number of Days</label>
+  <input type="number" [(ngModel)]="numberOfDays" value="100" />
+</div>
+<button (click)="startAnalytics()">Start</button>

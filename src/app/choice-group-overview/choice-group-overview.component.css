@@ -1,0 +1,45 @@
+.choice-overview {
+  border: 2px solid black;
+  border-radius: 5px;
+  padding: 5px;
+  display: inline-block;
+}
+
+.overview-header {
+	overflow: hidden;
+	margin-top: 5px;
+	margin: 5px 10px 10px 10px;
+}
+
+h2 {
+	display:inline-block;
+	margin: 0;
+}
+
+a {
+	text-decoration: none;
+}
+
+.next-days {
+	margin: 10px;
+}
+
+.separator {
+	border: 1px solid black;
+}
+
+.delete-group {
+	float: right;
+	margin-top: 5px;
+	color: red;
+	font-weight: bold;
+}
+
+.overview-content {
+	border: 2px solid black;
+	display:inline-block;
+	float:left;
+	margin: 10px;
+	border-radius: 10px;
+  background-color: lightgray;
+}

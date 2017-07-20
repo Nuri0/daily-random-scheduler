@@ -1,0 +1,11 @@
+Add a new Choice Group
+
+<input placeholder="Name for a new choice group" [(ngModel)]="newChoiceGroup.title" (keyup.enter)="addChoiceGroup()">
+
+<section class="main" *ngIf="choiceGroups.length > 0">
+  <ul class="choice-group-list">
+    <li *ngFor="let group of choiceGroups">
+      <choice-group-overview [group]="group"></choice-group-overview>
+    </li>
+  </ul>
+</section>

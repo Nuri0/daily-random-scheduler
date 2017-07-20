@@ -1,0 +1,7 @@
+.choice-list li {
+	list-style-type: none;
+}
+
+.clear {
+  clear: both;
+}
