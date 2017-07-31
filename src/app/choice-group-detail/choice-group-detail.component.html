@@ -22,4 +22,15 @@ Selections/Day <input type="number" [(ngModel)]="choiceGroup.choicesPerDay" (inp
   <label>Number of Days</label>
   <input type="number" [(ngModel)]="numberOfDays" value="100" />
 </div>
-<button (click)="startAnalytics()">Start</button>
+<button (click)="startAnalytics()">Analyze</button>
+
+<table *ngIf="analytics.length != 0">
+  <tr>
+    <th>Choice</th>
+    <th>How often?</th>
+  </tr>
+  <tr *ngFor="let row of analytics">
+    <td>{{row.choice}}</td>
+    <td>{{row.amount}}</td>
+  </tr>
+</table>

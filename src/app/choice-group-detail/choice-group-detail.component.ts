@@ -19,6 +19,8 @@ export class ChoiceGroupDetailComponent implements OnInit {
   choiceGroup: ChoiceGroup;
   newChoice: Choice = new Choice();
 
+  analytics = [];
+
   constructor(private route: ActivatedRoute, private choiceDataService: ChoiceDataService, private md5Service: SelectorService) { }
 
   addChoice() {
@@ -43,22 +45,29 @@ export class ChoiceGroupDetailComponent implements OnInit {
   startAnalytics() {
     let day = new Date();
 
-    let analytics = {};
+    let data = {};
     this.choiceGroup.choices.forEach(choice => {
-      analytics[choice.title] = 0;
+      data[choice.title] = 0;
     })
 
     for (let i=0; i<this.numberOfDays; i++) {
       let result = this.md5Service.getChoicesForDate(this.choiceGroup,day);
 
       result.forEach(element => {
-        analytics[element.choice.title]++;
+        data[element.choice.title]++;
       })
 
       // get to next day
       day.setDate(day.getDate() + 1);
     }
-    console.log(analytics);
+
+    this.analytics = [];
+    Object.keys(data).forEach(key => {
+      this.analytics.push({
+        choice: key,
+        amount: data[key]
+      })
+    })
   }
 
 }
