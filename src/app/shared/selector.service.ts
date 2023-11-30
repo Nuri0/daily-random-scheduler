@@ -1,10 +1,8 @@
 import { Injectable } from '@angular/core';
-import {Md5} from "ts-md5/dist/md5";
-//import seedrandom from "seedrandom";
-var seedrandom = require('seedrandom');
+import seedrandom from "seedrandom";
+import { Md5 } from "ts-md5/dist/md5";
 
 import { ChoiceGroup } from "./choice-group";
-import { Choice } from "./choice";
 
 @Injectable()
 export class SelectorService {
@@ -45,16 +43,7 @@ export class SelectorService {
     let strings = this.splitString(md5String,amount);
     var choices = [];
 
-    strings.forEach(element => {
-      /*
-      let rand = seedrandom(element)();
-      let stepSize = 1 / list.choices.length;
-      let index = 0;
-      while(stepSize < rand) {
-        stepSize += (1 / list.choices.length);
-        index++;
-      }
-      */
+    strings.forEach(element => {      
       let rand = seedrandom(element)();
       let weightSum = list.choices.reduce((acc,el) => {return acc + el.weight;},0);
       let stepSize = list.choices[0].weight/weightSum;

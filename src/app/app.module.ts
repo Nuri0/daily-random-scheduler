@@ -1,16 +1,15 @@
-import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { HttpModule } from '@angular/http';
+import { BrowserModule } from '@angular/platform-browser';
 
+import { AppRoutingModule, RoutedComponents } from "./app-routing.module";
 import { AppComponent } from './app.component';
-import {AppRoutingModule, RoutedComponents} from "./app-routing.module";
 import { ChoiceGroupOverviewComponent } from './choice-group-overview/choice-group-overview.component';
 
-import {ChoiceDataService} from "./shared/choice-data.service";
-import {LocalStorageService} from "./shared/local-storage.service";
 import { ChoiceGroupDetailComponent } from './choice-group-detail/choice-group-detail.component';
 import { ChoiceOverviewComponent } from './choice-overview/choice-overview.component';
+import { ChoiceDataService } from "./shared/choice-data.service";
+import { LocalStorageService } from "./shared/local-storage.service";
 
 @NgModule({
   declarations: [
@@ -23,7 +22,6 @@ import { ChoiceOverviewComponent } from './choice-overview/choice-overview.compo
   imports: [
     BrowserModule,
     FormsModule,
-    HttpModule,
     AppRoutingModule
   ],
   providers: [ChoiceDataService, LocalStorageService],

@@ -1,10 +1,15 @@
 import { Component, OnInit } from '@angular/core';
-import {ActivatedRoute} from "@angular/router";
+import { ActivatedRoute } from "@angular/router";
 
-import {ChoiceGroup} from "./../shared/choice-group";
-import {Choice} from "./../shared/choice";
-import {ChoiceDataService} from "./../shared/choice-data.service";
-import {SelectorService} from "./../shared/selector.service";
+import { Choice } from "./../shared/choice";
+import { ChoiceDataService } from "./../shared/choice-data.service";
+import { ChoiceGroup } from "./../shared/choice-group";
+import { SelectorService } from "./../shared/selector.service";
+
+export interface AnalyticResult {
+  choice: string;
+  amount: number;
+}
 
 @Component({
   selector: 'app-choice-group-detail',
@@ -19,7 +24,7 @@ export class ChoiceGroupDetailComponent implements OnInit {
   choiceGroup: ChoiceGroup;
   newChoice: Choice = new Choice();
 
-  analytics = [];
+  analytics: Array<AnalyticResult> = [];
 
   constructor(private route: ActivatedRoute, private choiceDataService: ChoiceDataService, private md5Service: SelectorService) { }
 
@@ -45,7 +50,7 @@ export class ChoiceGroupDetailComponent implements OnInit {
   startAnalytics() {
     let day = new Date();
 
-    let data = {};
+    let data: Record<string, number> = {};
     this.choiceGroup.choices.forEach(choice => {
       data[choice.title] = 0;
     })
@@ -62,11 +67,11 @@ export class ChoiceGroupDetailComponent implements OnInit {
     }
 
     this.analytics = [];
-    Object.keys(data).forEach(key => {
-      this.analytics.push({
+    this.analytics = Object.keys(data).map(key => {
+      return {
         choice: key,
         amount: data[key]
-      })
+      }
     })
   }
 
