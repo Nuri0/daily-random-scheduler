@@ -1,10 +1,21 @@
-import { enableProdMode } from '@angular/core';
-import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
-import { AppModule } from './app/app.module';
+import { enableProdMode, importProvidersFrom } from '@angular/core';
+
+import { FormsModule } from '@angular/forms';
+import { BrowserModule, bootstrapApplication } from '@angular/platform-browser';
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
+import { AppRoutingModule } from './app/app-routing.module';
+import { AppComponent } from './app/app.component';
+import { ChoiceDataService } from './app/shared/choice-data.service';
+import { LocalStorageService } from './app/shared/local-storage.service';
 import { environment } from './environments/environment';
 
 if (environment.production) {
   enableProdMode();
 }
 
-platformBrowserDynamic().bootstrapModule(AppModule);
+bootstrapApplication(AppComponent, {
+    providers: [
+        importProvidersFrom(BrowserModule, FormsModule, AppRoutingModule),
+        ChoiceDataService, LocalStorageService, provideAnimationsAsync()
+    ]
+});

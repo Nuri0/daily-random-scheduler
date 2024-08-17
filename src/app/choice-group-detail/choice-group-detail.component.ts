@@ -5,6 +5,9 @@ import { Choice } from "./../shared/choice";
 import { ChoiceDataService } from "./../shared/choice-data.service";
 import { ChoiceGroup } from "./../shared/choice-group";
 import { SelectorService } from "./../shared/selector.service";
+import { FormsModule } from '@angular/forms';
+import { NgIf, NgFor } from '@angular/common';
+import { ChoiceOverviewComponent } from '../choice-overview/choice-overview.component';
 
 export interface AnalyticResult {
   choice: string;
@@ -12,10 +15,12 @@ export interface AnalyticResult {
 }
 
 @Component({
-  selector: 'app-choice-group-detail',
-  templateUrl: './choice-group-detail.component.html',
-  styleUrls: ['./choice-group-detail.component.css'],
-  providers: [SelectorService]
+    selector: 'app-choice-group-detail',
+    templateUrl: './choice-group-detail.component.html',
+    styleUrls: ['./choice-group-detail.component.css'],
+    providers: [SelectorService],
+    standalone: true,
+    imports: [FormsModule, NgIf, NgFor, ChoiceOverviewComponent]
 })
 export class ChoiceGroupDetailComponent implements OnInit {
 

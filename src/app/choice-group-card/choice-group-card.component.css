@@ -1,3 +1,7 @@
+.choice-group-card {
+	max-width: fit-content;
+}
+
 .choice-overview {
   border: 2px solid black;
   border-radius: 5px;
@@ -22,24 +26,4 @@ a {
 
 .next-days {
 	margin: 10px;
-}
-
-.separator {
-	border: 1px solid black;
-}
-
-.delete-group {
-	float: right;
-	margin-top: 5px;
-	color: red;
-	font-weight: bold;
-}
-
-.overview-content {
-	border: 2px solid black;
-	display:inline-block;
-	float:left;
-	margin: 10px;
-	border-radius: 10px;
-  background-color: lightgray;
 }

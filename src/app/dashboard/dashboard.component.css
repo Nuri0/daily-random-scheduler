@@ -1,3 +1,5 @@
-.choice-group-list li {
-    list-style-type: none;
+.main {
+    padding-top: 32px;
+    display: flex;
+    gap: 16px;
 }

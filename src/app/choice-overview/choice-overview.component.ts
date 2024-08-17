@@ -2,11 +2,14 @@ import { Component, Input, OnInit } from '@angular/core';
 
 import {ChoiceDataService} from "./../shared/choice-data.service";
 import {Choice } from "./../shared/choice";
+import { FormsModule } from '@angular/forms';
 
 @Component({
-  selector: 'choice-overview',
-  templateUrl: './choice-overview.component.html',
-  styleUrls: ['./choice-overview.component.css']
+    selector: 'choice-overview',
+    templateUrl: './choice-overview.component.html',
+    styleUrls: ['./choice-overview.component.css'],
+    standalone: true,
+    imports: [FormsModule]
 })
 export class ChoiceOverviewComponent implements OnInit {
 

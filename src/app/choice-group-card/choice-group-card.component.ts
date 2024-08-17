@@ -1,17 +1,23 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { MatButtonModule } from '@angular/material/button';
+import { MatCardModule } from '@angular/material/card';
+import { MatIconModule } from '@angular/material/icon';
 
-import {ChoiceDataService} from "./../shared/choice-data.service";
-import {SelectorService} from "./../shared/selector.service";
-import {ChoiceGroup} from "./../shared/choice-group";
-import {Choice} from "./../shared/choice";
+import { DatePipe, NgFor, NgIf } from '@angular/common';
+import { RouterLink } from '@angular/router';
+import { ChoiceDataService } from "../shared/choice-data.service";
+import { ChoiceGroup } from "../shared/choice-group";
+import { SelectorService } from "../shared/selector.service";
 
 @Component({
-  selector: 'choice-group-overview',
-  templateUrl: './choice-group-overview.component.html',
-  styleUrls: ['./choice-group-overview.component.css'],
-  providers:[SelectorService]
+    selector: 'choice-group-overview',
+    templateUrl: './choice-group-card.component.html',
+    styleUrls: ['./choice-group-card.component.css'],
+    providers: [SelectorService],
+    standalone: true,
+    imports: [RouterLink, NgIf, NgFor, DatePipe, MatCardModule, MatButtonModule, MatIconModule]
 })
-export class ChoiceGroupOverviewComponent implements OnInit {
+export class ChoiceGroupCardComponent implements OnInit {
 
   @Input()
   group: ChoiceGroup;
