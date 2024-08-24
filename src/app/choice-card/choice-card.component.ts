@@ -1,17 +1,20 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { MatButtonModule } from '@angular/material/button';
+import { MatCardModule } from '@angular/material/card';
+import { MatIconModule } from '@angular/material/icon';
 
-import {ChoiceDataService} from "./../shared/choice-data.service";
-import {Choice } from "./../shared/choice";
 import { FormsModule } from '@angular/forms';
+import { Choice } from "../shared/choice";
+import { ChoiceDataService } from "../shared/choice-data.service";
 
 @Component({
-    selector: 'choice-overview',
-    templateUrl: './choice-overview.component.html',
-    styleUrls: ['./choice-overview.component.css'],
+    selector: 'choice-card',
+    templateUrl: './choice-card.component.html',
+    styleUrls: ['./choice-card.component.css'],
     standalone: true,
-    imports: [FormsModule]
+    imports: [FormsModule, MatCardModule, MatIconModule, MatButtonModule]
 })
-export class ChoiceOverviewComponent implements OnInit {
+export class ChoiceCardComponent implements OnInit {
 
   @Input()
   choice: Choice;
@@ -25,6 +28,7 @@ export class ChoiceOverviewComponent implements OnInit {
   }
 
   choiceUpdated() {
+    console.log('Hey');
     this.choiceDataService.updateChoiceById(this.choice.id,this.groupId,this.choice);
   }
 

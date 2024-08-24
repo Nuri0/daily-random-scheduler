@@ -1,0 +1,22 @@
+<mat-card class="choice-card" appearance="outlined">
+  <mat-card-header>
+    <mat-card-title>{{choice.title}}</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <table>
+      <tr>
+        <td><b>Color:</b></td>
+        <td><input type="color" [(ngModel)]="choice.color" (input)="choiceUpdated()" /></td>
+      </tr>
+      <tr>
+        <td><b>Weight:</b></td>
+        <td><input type="number" [(ngModel)]="choice.weight" min="0" (input)="choiceUpdated()" /></td>
+      </tr>
+    </table>
+  </mat-card-content>
+  <mat-card-actions align="end">
+    <button mat-icon-button (click)="deleteChoice()">
+      <mat-icon>delete</mat-icon>
+    </button>
+  </mat-card-actions>
+</mat-card>

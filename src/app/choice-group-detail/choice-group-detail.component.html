@@ -4,13 +4,11 @@ Add a new choice <input placeholder="Name for a new choice" [(ngModel)]="newChoi
 
 <div *ngIf=choiceGroup.choices.length>
   <ul class="choice-list">
-    <li *ngFor="let choice of choiceGroup.choices">
-      <choice-overview [choice]="choice" [groupId]="choiceGroup.id"></choice-overview>
-    </li>
+    @for (choice of choiceGroup.choices; track choice.id) {
+      <choice-card [choice]="choice" [groupId]="choiceGroup.id"></choice-card>
+    }
   </ul>
 </div>
-
-<div class="clear"></div>
 
 <h2>Settings</h2>
 Selections/Day <input type="number" [(ngModel)]="choiceGroup.choicesPerDay" (input)="choiceGroupUpdated()" />

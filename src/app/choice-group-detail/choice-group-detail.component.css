@@ -1,7 +1,6 @@
-.choice-list li {
+.choice-list {
+  display: flex;
 	list-style-type: none;
-}
-
-.clear {
-  clear: both;
+  flex-wrap: wrap;
+  gap: 16px;
 }

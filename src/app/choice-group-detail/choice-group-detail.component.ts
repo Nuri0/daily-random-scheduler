@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from "@angular/router";
 
+import { NgFor, NgIf } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { ChoiceCardComponent } from '../choice-card/choice-card.component';
 import { Choice } from "./../shared/choice";
 import { ChoiceDataService } from "./../shared/choice-data.service";
 import { ChoiceGroup } from "./../shared/choice-group";
 import { SelectorService } from "./../shared/selector.service";
-import { FormsModule } from '@angular/forms';
-import { NgIf, NgFor } from '@angular/common';
-import { ChoiceOverviewComponent } from '../choice-overview/choice-overview.component';
 
 export interface AnalyticResult {
   choice: string;
@@ -20,7 +20,7 @@ export interface AnalyticResult {
     styleUrls: ['./choice-group-detail.component.css'],
     providers: [SelectorService],
     standalone: true,
-    imports: [FormsModule, NgIf, NgFor, ChoiceOverviewComponent]
+    imports: [FormsModule, NgIf, NgFor, ChoiceCardComponent]
 })
 export class ChoiceGroupDetailComponent implements OnInit {
 
