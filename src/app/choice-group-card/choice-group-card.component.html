@@ -11,7 +11,8 @@
 				<tr *ngFor="let outlook of getNextDaysSelections()">
 					<td><b>{{outlook.day | date:"EEEE"}}</b></td>
 					<td *ngFor="let choice of outlook.selections">
-						<div class="choice-overview" [style.background]="choice.choice.color">
+						<div class="choice-overview" [style.background]="choice.choice.color"
+							[style.color]="isColorLight(choice.choice.color) ? '#000' : '#FFF'">
 							{{choice.choice.title}}
 						</div>
 					</td>
@@ -28,25 +29,3 @@
 		</button>
 	</mat-card-actions>
 </mat-card>
-
-<!-- <div class="overview-content">
-	<div class="overview-header">
-		<h2><a [routerLink]="['/choice-group-detail',group.id]">{{group.title}}</a></h2>
-		<button class="delete-group" (click)="deleteChoiceGroup()">X</button>
-	</div>
-
-	<div class="separator"></div>
-
-	<div class="next-days" *ngIf="group.choices.length > 0">
-	<table>
-		<tr *ngFor="let outlook of getNextDaysSelections()">
-			<td><b>{{outlook.day | date:"EEEE"}}</b></td>
-			<td *ngFor="let choice of outlook.selections">
-				<div class="choice-overview" [style.background]="choice.choice.color">
-					{{choice.choice.title}}
-				</div>
-			</td>
-		</tr>
-	</table>
-	</div>
-</div> -->
