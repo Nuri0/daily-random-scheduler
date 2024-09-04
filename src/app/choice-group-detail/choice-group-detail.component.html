@@ -1,34 +1,46 @@
-<h2>Choices</h2>
+<h2 mat-dialog-title>Choices</h2>
 
-Add a new choice <input placeholder="Name for a new choice" [(ngModel)]="newChoice.title" (keyup.enter)="addChoice()">
+<mat-dialog-content>
+  Add a new choice
+  <input
+    placeholder="Name for a new choice"
+    [(ngModel)]="newChoice.title"
+    (keyup.enter)="addChoice()"
+  />
 
-<div *ngIf=choiceGroup.choices.length>
-  <ul class="choice-list">
-    @for (choice of choiceGroup.choices; track choice.id) {
+  <div *ngIf="choiceGroup.choices.length">
+    <ul class="choice-list">
+      @for (choice of choiceGroup.choices; track choice.id) {
       <choice-card [choice]="choice" [groupId]="choiceGroup.id"></choice-card>
-    }
-  </ul>
-</div>
+      }
+    </ul>
+  </div>
 
-<h2>Settings</h2>
-Selections/Day <input type="number" [(ngModel)]="choiceGroup.choicesPerDay" (input)="choiceGroupUpdated()" />
+  <h2>Settings</h2>
+  Selections/Day
+  <input
+    type="number"
+    [(ngModel)]="choiceGroup.choicesPerDay"
+    (input)="choiceGroupUpdated()"
+  />
 
-<h2>Analytics</h2>
-<h3>Distribution of choices for the next {{numberOfDays}} days</h3>
+  <h2>Analytics</h2>
+  <h3>Distribution of choices for the next {{ numberOfDays }} days</h3>
 
-<div>
-  <label>Number of Days</label>
-  <input type="number" [(ngModel)]="numberOfDays" value="100" />
-</div>
-<button (click)="startAnalytics()">Analyze</button>
+  <div>
+    <label>Number of Days</label>
+    <input type="number" [(ngModel)]="numberOfDays" value="100" />
+  </div>
+  <button (click)="startAnalytics()">Analyze</button>
 
-<table *ngIf="analytics.length != 0">
-  <tr>
-    <th>Choice</th>
-    <th>How often?</th>
-  </tr>
-  <tr *ngFor="let row of analytics">
-    <td>{{row.choice}}</td>
-    <td>{{row.amount}}</td>
-  </tr>
-</table>
+  <table *ngIf="analytics.length != 0">
+    <tr>
+      <th>Choice</th>
+      <th>How often?</th>
+    </tr>
+    <tr *ngFor="let row of analytics">
+      <td>{{ row.choice }}</td>
+      <td>{{ row.amount }}</td>
+    </tr>
+  </table>
+</mat-dialog-content>

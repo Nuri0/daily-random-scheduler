@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { ActivatedRoute } from "@angular/router";
 
 import { NgFor, NgIf } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { MAT_DIALOG_DATA, MatDialogModule } from '@angular/material/dialog';
 import { ChoiceCardComponent } from '../choice-card/choice-card.component';
 import { Choice } from "./../shared/choice";
 import { ChoiceDataService } from "./../shared/choice-data.service";
@@ -20,9 +21,11 @@ export interface AnalyticResult {
     styleUrls: ['./choice-group-detail.component.css'],
     providers: [SelectorService],
     standalone: true,
-    imports: [FormsModule, NgIf, NgFor, ChoiceCardComponent]
+    imports: [FormsModule, NgIf, NgFor, ChoiceCardComponent, MatDialogModule]
 })
 export class ChoiceGroupDetailComponent implements OnInit {
+
+  choiceGroupId: number = inject(MAT_DIALOG_DATA);
 
   numberOfDays: number = 100;
 
@@ -39,9 +42,7 @@ export class ChoiceGroupDetailComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.route.params.subscribe(params => {
-      this.choiceGroup = this.choiceDataService.getChoiceGroupById(+params["id"]);
-    })
+    this.choiceGroup = this.choiceDataService.getChoiceGroupById(this.choiceGroupId);
   }
 
   choiceUpdated(choice) {

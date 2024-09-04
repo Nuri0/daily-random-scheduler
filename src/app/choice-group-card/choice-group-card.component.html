@@ -21,7 +21,7 @@
 			</div>
 	</mat-card-content>
 	<mat-card-actions align="end">
-		<button mat-icon-button [routerLink]="['/choice-group-detail',group.id]">
+		<button (click)="openDialog()" mat-icon-button>
 			<mat-icon>edit</mat-icon>
 		</button>
 		<button mat-icon-button (click)="deleteChoiceGroup()">

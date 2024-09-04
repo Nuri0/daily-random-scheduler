@@ -1,10 +1,12 @@
-import { Component, Input, OnInit } from "@angular/core";
+import { Component, inject, Input } from "@angular/core";
 import { MatButtonModule } from "@angular/material/button";
 import { MatCardModule } from "@angular/material/card";
+import { MatDialog } from "@angular/material/dialog";
 import { MatIconModule } from "@angular/material/icon";
 
 import { DatePipe, NgFor, NgIf } from "@angular/common";
 import { RouterLink } from "@angular/router";
+import { ChoiceGroupDetailComponent } from '../choice-group-detail/choice-group-detail.component';
 import { ChoiceDataService } from "../shared/choice-data.service";
 import { ChoiceGroup } from "../shared/choice-group";
 import { SelectorService } from "../shared/selector.service";
@@ -25,9 +27,12 @@ import { SelectorService } from "../shared/selector.service";
     MatIconModule,
   ],
 })
-export class ChoiceGroupCardComponent implements OnInit {
+export class ChoiceGroupCardComponent {
+
   @Input()
   group: ChoiceGroup;
+
+  readonly dialog = inject(MatDialog);
 
   constructor(
     private choiceDataService: ChoiceDataService,
@@ -75,5 +80,15 @@ export class ChoiceGroupCardComponent implements OnInit {
     return choices;
   }
 
-  ngOnInit() {}
+  openDialog() {
+    const dialogRef = this.dialog.open(ChoiceGroupDetailComponent, {
+      data: this.group.id,
+      // TODO wait for https://github.com/angular/components/issues/29384 to be fixed to avoid using 3 properties
+      minWidth: "0",
+      maxWidth: "100%",
+      width: "80%",
+      height: "80%"
+    });
+
+  }
 }
