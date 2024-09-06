@@ -1,0 +1,19 @@
+<h2 mat-dialog-title>Import/Export</h2>
+<mat-dialog-content>
+
+    <h3>Import</h3>
+    <mat-form-field class="full-width">
+        <mat-label>Data</mat-label>
+        <textarea [formControl]="importControl" rows="5" matInput placeholder="Paste JSON data"></textarea>
+    </mat-form-field>
+    <button mat-button (click)="importData()" [disabled]="importControl.invalid">
+        Import 
+        <mat-icon>upload</mat-icon>
+    </button>
+
+    <h3>Export</h3>
+    <button mat-button (click)="copyConfigToClipboard()">
+        Export 
+        <mat-icon>content_paste_go</mat-icon>
+    </button>
+</mat-dialog-content>

@@ -1,9 +1,12 @@
 import { Injectable } from '@angular/core';
 
-import {Choice} from "./choice";
-import {ChoiceGroup} from "./choice-group";
+import { Choice } from "./choice";
+import { ChoiceGroup } from "./choice-group";
 
-import {LocalStorageService} from "./local-storage.service";
+import { LocalStorageService } from "./local-storage.service";
+import { Config } from './model';
+
+import { Clipboard } from '@angular/cdk/clipboard';
 
 @Injectable()
 export class ChoiceDataService {
@@ -12,45 +15,58 @@ export class ChoiceDataService {
   private lastChoiceIdSaveString = "lastChoiceId";
   private lastChoiceGroupIdSaveString = "lastChoiceGroup";
 
-  lastChoiceId: number = 0;
-  lastChoiceGroupId: number = 0;
-  groups: ChoiceGroup[] = [];
+  private configSaveString = 'schedulerConfig';
 
-  constructor(private lss: LocalStorageService) {
-    this.groups = lss.get(this.choicesSaveString) || [];
-    this.lastChoiceId = lss.get(this.lastChoiceIdSaveString) || 0;
-    this.lastChoiceGroupId = lss.get(this.lastChoiceGroupIdSaveString) || 0;
+  private config: Config;
+  private defaultCOnfig: Config = {
+    groups: [],
+    lastChoiceGroupId: 0,
+    lastChoiceId: 0
+  }
+
+  constructor(
+    private lss: LocalStorageService,
+    private clipboard: Clipboard
+  ) {
+    this.config = lss.get(this.configSaveString) || this.defaultCOnfig;
   }
 
   private save() {
-    this.lss.save(this.choicesSaveString,this.groups);
-    this.lss.save(this.lastChoiceIdSaveString,this.lastChoiceId);
-    this.lss.save(this.lastChoiceGroupIdSaveString,this.lastChoiceGroupId);
+    this.lss.save(this.configSaveString, this.config);
+  }
+
+  public copyToClipboard() {
+    this.clipboard.copy(JSON.stringify(this.config));
+  }
+
+  public import(json: string) {
+    this.config = JSON.parse(json);
+    this.save();
   }
 
   // ###################### ChoiceGroup methods ##########################
 
   addChoiceGroup(group:ChoiceGroup):ChoiceDataService {
     if (!group.id) {
-      group.id = ++this.lastChoiceGroupId;
+      group.id = ++this.config.lastChoiceGroupId;
     }
-    this.groups.push(group);
+    this.config.groups.push(group);
     this.save();
     return this;
   }
 
   deleteChoiceGroupById(groupId: number): ChoiceDataService {
-    this.groups = this.groups.filter(group => group.id !== groupId);
+    this.config.groups = this.config.groups.filter(group => group.id !== groupId);
     this.save();
     return this;
   }
 
   getAllChoiceGroups(): ChoiceGroup[] {
-    return this.groups;
+    return this.config.groups;
   }
 
   getChoiceGroupById(groupId:number): ChoiceGroup {
-    return this.groups.filter(group => group.id === groupId).pop();
+    return this.config.groups.filter(group => group.id === groupId).pop();
   }
 
   updateChoiceGroupById(groupId: number, values: Object = {}): ChoiceGroup {
@@ -67,7 +83,7 @@ export class ChoiceDataService {
 
   addChoice(choice: Choice, groupId: number):ChoiceDataService {
     if (!choice.id) {
-      choice.id = ++this.lastChoiceId;
+      choice.id = ++this.config.lastChoiceId;
     }
     let group = this.getChoiceGroupById(groupId);
     if (!!group) {

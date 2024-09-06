@@ -5,7 +5,7 @@ export class LocalStorageService {
 
   constructor() { }
 
-  save(key,data) {
+  save(key: string, data) {
     localStorage.setItem(key,JSON.stringify(data));
   }
 
