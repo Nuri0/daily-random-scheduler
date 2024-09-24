@@ -1,4 +1,4 @@
-import {Choice} from "./choice";
+import { Choice } from "./choice";
 
 export class ChoiceGroup {
   id: number;

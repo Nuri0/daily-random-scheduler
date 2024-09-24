@@ -1,37 +1,52 @@
 <h2 mat-dialog-title>Choices</h2>
 
 <mat-dialog-content>
-  Add a new choice
-  <input
-    placeholder="Name for a new choice"
-    [(ngModel)]="newChoice.title"
-    (keyup.enter)="addChoice()"
-  />
+  <mat-form-field>
+    <mat-label>Name</mat-label>
+    <input
+      matInput
+      [formControl]="newChoiceNameControl"
+      placeholder="Name for new choice"
+    />
+    <button
+      type="button"
+      matSuffix
+      [disabled]="newChoiceNameControl.invalid"
+      mat-button
+      (click)="addChoice()"
+    >
+      Add
+    </button>
+  </mat-form-field>
 
-  <div *ngIf="choiceGroup.choices.length">
-    <ul class="choice-list">
-      @for (choice of choiceGroup.choices; track choice.id) {
-      <choice-card [choice]="choice" [groupId]="choiceGroup.id"></choice-card>
-      }
-    </ul>
+  <div *ngIf="choiceGroup.choices.length > 0" class="choice-list">
+    @for (choice of choiceGroup.choices; track choice.id) {
+    <choice-card [choice]="choice" [groupId]="choiceGroup.id"></choice-card>
+    }
   </div>
 
   <h2>Settings</h2>
-  Selections/Day
-  <input
-    type="number"
-    [(ngModel)]="choiceGroup.choicesPerDay"
-    (input)="choiceGroupUpdated()"
-  />
+  
+  <mat-form-field>
+    <mat-label>Selections/Day</mat-label>
+    <input
+      matInput
+      [(ngModel)]="choiceGroup.choicesPerDay"
+      type="number"
+      (input)="choiceGroupUpdated()"
+    />
+  </mat-form-field>
 
   <h2>Analytics</h2>
   <h3>Distribution of choices for the next {{ numberOfDays }} days</h3>
 
+  <mat-form-field>
+    <mat-label>Number of Days</mat-label>
+    <input matInput type="number" [(ngModel)]="numberOfDays" value="100" />
+  </mat-form-field>
   <div>
-    <label>Number of Days</label>
-    <input type="number" [(ngModel)]="numberOfDays" value="100" />
+    <button mat-button (click)="startAnalytics()">Analyze</button>
   </div>
-  <button (click)="startAnalytics()">Analyze</button>
 
   <table *ngIf="analytics.length != 0">
     <tr>

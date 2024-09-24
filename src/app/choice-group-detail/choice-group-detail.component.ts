@@ -1,9 +1,11 @@
 import { Component, inject, OnInit } from '@angular/core';
-import { ActivatedRoute } from "@angular/router";
 
 import { NgFor, NgIf } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormControl, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { MatButtonModule } from '@angular/material/button';
 import { MAT_DIALOG_DATA, MatDialogModule } from '@angular/material/dialog';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
 import { ChoiceCardComponent } from '../choice-card/choice-card.component';
 import { Choice } from "./../shared/choice";
 import { ChoiceDataService } from "./../shared/choice-data.service";
@@ -21,7 +23,7 @@ export interface AnalyticResult {
     styleUrls: ['./choice-group-detail.component.css'],
     providers: [SelectorService],
     standalone: true,
-    imports: [FormsModule, NgIf, NgFor, ChoiceCardComponent, MatDialogModule]
+    imports: [ReactiveFormsModule, FormsModule, NgIf, NgFor, ChoiceCardComponent, MatButtonModule, MatDialogModule, MatFormFieldModule, MatInputModule]
 })
 export class ChoiceGroupDetailComponent implements OnInit {
 
@@ -30,15 +32,17 @@ export class ChoiceGroupDetailComponent implements OnInit {
   numberOfDays: number = 100;
 
   choiceGroup: ChoiceGroup;
-  newChoice: Choice = new Choice();
+  newChoiceNameControl = new FormControl('', Validators.required);
 
   analytics: Array<AnalyticResult> = [];
 
-  constructor(private route: ActivatedRoute, private choiceDataService: ChoiceDataService, private md5Service: SelectorService) { }
+  constructor(private choiceDataService: ChoiceDataService, private md5Service: SelectorService) { }
 
   addChoice() {
-    this.choiceDataService.addChoice(this.newChoice,this.choiceGroup.id);
-    this.newChoice = new Choice();
+    let newChoice: Choice = new Choice();
+    newChoice.title = this.newChoiceNameControl.value;
+    this.choiceDataService.addChoice(newChoice, this.choiceGroup.id);
+    this.newChoiceNameControl.reset();
   }
 
   ngOnInit() {

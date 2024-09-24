@@ -28,7 +28,6 @@ export class ChoiceCardComponent implements OnInit {
   }
 
   choiceUpdated() {
-    console.log('Hey');
     this.choiceDataService.updateChoiceById(this.choice.id,this.groupId,this.choice);
   }
 
