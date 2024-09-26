@@ -4,6 +4,8 @@ import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
 
 import { FormsModule } from '@angular/forms';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
 import { Choice } from "../shared/choice";
 import { ChoiceDataService } from "../shared/choice-data.service";
 
@@ -12,7 +14,7 @@ import { ChoiceDataService } from "../shared/choice-data.service";
     templateUrl: './choice-card.component.html',
     styleUrls: ['./choice-card.component.css'],
     standalone: true,
-    imports: [FormsModule, MatCardModule, MatIconModule, MatButtonModule]
+    imports: [FormsModule, MatCardModule, MatIconModule, MatButtonModule, MatFormFieldModule, MatInputModule]
 })
 export class ChoiceCardComponent implements OnInit {
 
